@@ -10,6 +10,8 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{mathtools}
+\usepackage{geometry}
+\geometry{margin=1in}
 
 \title{Chapter 2: Quantum Dynamics in Hilbert Space} % Title of the assignment
 
@@ -17,6 +19,97 @@
 
 \maketitle
 
-\section*{Time-Evolution Operator with Time-Dependent Hamiltonian}
+\section{Overview}
+
+Chapter 2 introduces the reader to the Time-Dependent Schr{\"o}dinger equation (TDSE)
+and defines the time propagator operator ($U(t,t_0)$). The two level system is
+provided as an example of solving the TDSE and the corresponding time propagator operator
+is determined. The interaction picture is used to simplify the
+problem from the Schr{\"o}dinger picture and various properties are shown. Lastly,
+the Greens function within the frequency domain is used to model the proposed
+Wigner and Weisskopy of irreversible decay.
+
+\section{Time-Evolution Operator with Time-Dependent Hamiltonian}{\label{sec:setup}}
+
+Within the Schr{\"o}dinger picture, the TD wavefunction in the position space $\mathbf{x}$
+is given by
+\begin{equation}
+  \psi(\mathbf{x},t) = \langle \mathbf{x}|\psi(t)\rangle
+\end{equation}
+and the TDSE will be defined as
+\begin{equation}
+  \frac{\partial|\psi(t)\rangle}{\partial t} = -\frac{i}{\hbar}H|\psi(t)\rangle
+  \label{eqn:tdse}
+\end{equation}
+and solutions to Eqn \eqref{eqn:tdse} are the eigenvectors $|\phi_n(t)\rangle$ with corresponding
+eigenvalues $E_n$. These eigenvections form a complete basis set and satisfy the completness
+condition $\sum_n|\phi_n\rangle\langle\phi_n|=1$. We can expand the wavefunction
+$\psi(t)$ within this basis,
+\begin{equation}
+  |\psi(t)\rangle = \sum_n|\phi_n\rangle\langle\phi_n|\psi(t)\rangle.
+  \label{eqn:basis_expand}
+\end{equation}
+
+Substitution of Eqn \eqref{eqn:basis_expand} into the TDSE yields
+\begin{equation}
+  \frac{d}{dt}\langle \phi_n|\psi(t)\rangle = -\frac{i}{\hbar}E_n\langle\phi_n|\psi(t)\rangle,
+  \label{eqn:tdse_basis}
+\end{equation}
+which is 1st-order differential equation with the solution
+\begin{equation}
+  \langle\phi_n|\psi(t)\rangle = \sum_nE^{-\frac{iE_n}{\hbar}(t-t_0)}|\phi_n\rangle
+  \langle\phi_n|\psi(t_0)\rangle.
+  \label{eqn:time_soln}
+\end{equation}
+
+The general time evolution operator is defined as
+\begin{equation}
+  |\psi(t)\rangle = U(t,t_0)|\psi(t_0)\rangle.
+  \label{eqn:time_op}
+\end{equation}
+
+A few properties of the time evolution operator are that $U(t_0,t_0)=1$
+and unitary $U^{\dagger}U=1$. The usefulness of this operator provides the means to solve the
+time evolution of the system in general without needing specific initial conditions.
+Hence, the TDSE only needs to be solved once with the corresponding $U(t,t_0)$ which
+may operate on any intial state $|\psi(t_0)\rangle$. Based on Eqn \eqref{eqn:time_soln} and
+\eqref{eqn:time_op}, the time evolution operator is
+\begin{equation}
+  U(t,t_0) = \sum_n|\phi_n\rangle E^{-\frac{iE_n}{\hbar}(t-t_0)}\langle\phi_n|.
+  \label{eqn:time_evol}
+\end{equation}
+
+The current form of $U(t,t_0)$ is limited to the representation of the Hamiltnian $H$
+and a general form is provided for greater flexibility. This will allow semiclassical
+approximations. The general form can be obtained by the concept of a function of an
+operator via Taylor series expansion. Given function $f(A)$ for operator $A$, the Taylor
+series can be seen as
+\begin{align}
+  f(A) \equiv \sum^{\infty}_{p=0}\frac{f^{(p)}(0)}{p!}x^p \\
+  f(A) = \sum^{\infty}_{p=0}\frac{f^{(p)}(0)}{p!}x^p \equiv f(a_j)|\alpha_j\rangle\langle\alpha_j|
+  \label{eqn:op_func}
+\end{align}
+
+With Eqns \ref{eqn:time_evol} and \ref{eqn:op_func}, the $U(t,t_0)$ is recasted into the form
+\begin{equation}
+  U(t,t_0) = E^{-\frac{i}{\hbar}H(t-t_0)}.
+\end{equation}
+
+\subsection{Two-level System Example}
+
+Section \ref{sec:setup} reviews the TD quantum mechanic equations and introduces the
+generalized time evolution operator. With the tools, an example of the time evolution
+operator is demonstrated for a coupled two-level system ($|\phi_a\rangle$ and $|\phi_b\rangle$),
+with energies $\epsilon_a$ and $\epsilon_b$, and a coupling $V_{ab}$, represented by the
+Hamiltonian
+\begin{equation}
+  H =
+  \begin{pmatrix}
+    \epsilon_a & V_{ab} \\
+    V_{ba} & \epsilon_b
+  \end{pmatrix}
+  \label{eqn:two_level_H}
+\end{equation}
+where $V_{ab} - V*_{ba} = |V_{ab}|E^{-i\chi},\; 0 <\chi < 2\pi$.
 
 \end{document}
