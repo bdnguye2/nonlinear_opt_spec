@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{mathtools}
 \usepackage{geometry}
+\usepackage{graphicx}
 \geometry{margin=1in}
 
 \title{Chapter 2: Quantum Dynamics in Hilbert Space} % Title of the assignment
@@ -151,7 +152,7 @@ Eigenvectors corresponding to eigenvalues $\lambda$ are
   \end{pmatrix}
   \label{eqn:theta}
 \end{equation}
-The corresponding generalized eigenvectors ($|\psi_{\m}\rangle$) are simply
+The corresponding generalized eigenvectors ($|\psi_{\pm}\rangle$) are simply
 linear compinations of $|\phi_a\rangle$ and $|\phi_b\rangle$
 with the associated radiation phase $e^{\pm i\chi}$. These are rotated eigenvectors
 from Eqn \eqref{eqn:theta}
@@ -181,6 +182,7 @@ $\theta$ is a transformation angle that can be determined with Eqns
 notebook
 \begin{equation}
   \tan 2\theta \equiv \frac{2|V_{ab}|}{\epsilon_a-\epsilon_b},\; 0<\theta<\pi/2
+  \label{eqn:angle_transform}
 \end{equation}
 
 Within this basis, the time evolution operator is given by
@@ -192,7 +194,7 @@ Within this basis, the time evolution operator is given by
 
 \subsection{Progating the two-level system}
 
-Suppose the system is at initial time $t_0$ in the $|\phi_a\rangle$ state
+Suppose the system is at initial time $t_0=0$ in the $|\phi_a\rangle$ state
 and the probability that the system is in $|\phi_a\rangle$ at time $t$.
 \begin{equation}
   P_{ab}(t)\equiv |\langle\phi_b|\psi(t)\rangle|^2 = |\langle\phi_b|U(t,t_0)|\phi_a\rangle|^2
@@ -202,11 +204,42 @@ and the probability that the system is in $|\phi_a\rangle$ at time $t$.
 The states $|\phi_a\rangle$ and $|\phi_b\rangle$ are defined as unit
 vectors and the substitution of Eqn \eqref{eqn:time_2_level} into Eqn \eqref{eqn:prob_time}
 will yield the probability to be in state $|\phi_a\rangle$ at a given time $t$.
-The work is shown in mathematica.
-\begin{equation}
-  P_{ab}(t)=\frac{4|V_{ab}|^2}{4|V_{ab}|^2+(\epsilon_a-\epsilon_b)^2}
-  \sin^2\Bigg(\sqrt{4|V_{ab}+(\epsilon_a-\epsilon_b)^2}}\frac{t}{2\hbar}\Bigg)
-\end{equation}
+From mathematica, the $P_{ab}(t)$ is given as
+\begin{align}
+  P_{ab}(t)&= \sin^2(2\theta)\sin^2\Bigg(\frac{\lambda_- - \lambda_+}{2\hbar}t\Bigg)
+  \label{eqn:trig_identity}\\
+  &=\frac{4|V_{ab}|^2}{4|V_{ab}|^2+(\epsilon_a-\epsilon_b)^2}
+  \sin^2\Bigg(\sqrt{4|V_{ab}|+(\epsilon_a-\epsilon_b)^2}\frac{t}{2\hbar}\Bigg)
+  \label{eqn:prob_final}
+\end{align}
 
+The step from Eqn \eqref{eqn:trig_identity} to \eqref{eqn:prob_final}
+is using Eqn \eqref{eqn:angle_transform}, the trignometry identity
+$\sin^22\theta + \cos^22\theta = 1$, and substituting in the eigenvalues $\lambda$.
+This is left for the reader to derive. Figure \ref{fig:prob} is the plot of
+the probability for various coupling constants $V_{ab}$.
+%\begin{align*}
+%  (\tan 2\theta & =  \frac{2|V_{ab}|}{\epsilon_a-\epsilon_b})^2 \\
+%  \tan^2(2\theta) & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
+%  \sin^2(2\theta) + \cos^2(2\theta) & = 1 \\
+%  \tan^2(2\theta) & = \frac{1}{\cos^2(2\theta)} - 1 \\
+%  & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
+%  \frac{1}{\cos^2(2\theta)} & = \frac{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}{(\epsilon_a-\epsilon_b)^2} \\
+%  \cos^2(2\theta) & = \frac{(\epsilon_a-\epsilon_b)^2}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2} \\
+%  & = 1 - \sin^2(2\theta) \\
+%  \sin^2(2\theta) & = \frac{4|V_{ab}|}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}
+%\end{align*}
+\begin{figure}[hbpt]
+  \centering
+  \includegraphics[scale=0.8]{prob2.eps}
+  \caption{Rabi oscillation of the two level system for coupling constant $V_{ab}$ at 0, 0.5, and
+  5.}
+  \label{fig:prob}
+\end{figure}
+This is known as the Rabi formula and
+\begin{equation}
+  \Omega_{\text{R}}=\sqrt{4|V_{ab}|+(\epsilon_a-\epsilon_b)^2}/\hbar
+\end{equation}
+is the Rabi frequency.
 
 \end{document}
