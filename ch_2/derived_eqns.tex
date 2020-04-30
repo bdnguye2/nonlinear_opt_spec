@@ -57,7 +57,7 @@ Substitution of Eqn \eqref{eqn:basis_expand} into the TDSE yields
 \end{equation}
 which is 1st-order differential equation with the solution
 \begin{equation}
-  \langle\phi_n|\psi(t)\rangle = \sum_nE^{-\frac{iE_n}{\hbar}(t-t_0)}|\phi_n\rangle
+  \langle\phi_n|\psi(t)\rangle = \sum_ne^{-\frac{iE_n}{\hbar}(t-t_0)}|\phi_n\rangle
   \langle\phi_n|\psi(t_0)\rangle.
   \label{eqn:time_soln}
 \end{equation}
@@ -75,7 +75,7 @@ Hence, the TDSE only needs to be solved once with the corresponding $U(t,t_0)$ w
 may operate on any intial state $|\psi(t_0)\rangle$. Based on Eqn \eqref{eqn:time_soln} and
 \eqref{eqn:time_op}, the time evolution operator is
 \begin{equation}
-  U(t,t_0) = \sum_n|\phi_n\rangle E^{-\frac{iE_n}{\hbar}(t-t_0)}\langle\phi_n|.
+  U(t,t_0) = \sum_n|\phi_n\rangle e^{-\frac{iE_n}{\hbar}(t-t_0)}\langle\phi_n|.
   \label{eqn:time_evol}
 \end{equation}
 
@@ -86,13 +86,13 @@ operator via Taylor series expansion. Given function $f(A)$ for operator $A$, th
 series can be seen as
 \begin{align}
   f(A) \equiv \sum^{\infty}_{p=0}\frac{f^{(p)}(0)}{p!}x^p \\
-  f(A) = \sum^{\infty}_{p=0}\frac{f^{(p)}(0)}{p!}x^p \equiv f(a_j)|\alpha_j\rangle\langle\alpha_j|
+  f(A) = \sum^{\infty}_{p=0}\frac{f^{(p)}(0)}{p!}x^p \equiv f(a_j)|\alpha_j\rangle\langle\alpha_j
   \label{eqn:op_func}
 \end{align}
 
-With Eqns \ref{eqn:time_evol} and \ref{eqn:op_func}, the $U(t,t_0)$ is recasted into the form
+With Eqns \eqref{eqn:time_evol} and \eqref{eqn:op_func}, the $U(t,t_0)$ is recasted into the form
 \begin{equation}
-  U(t,t_0) = E^{-\frac{i}{\hbar}H(t-t_0)}.
+  U(t,t_0) = e^{-\frac{i}{\hbar}H(t-t_0)}.
 \end{equation}
 
 \subsection{Two-level System Example}
@@ -110,6 +110,103 @@ Hamiltonian
   \end{pmatrix}
   \label{eqn:two_level_H}
 \end{equation}
-where $V_{ab} - V*_{ba} = |V_{ab}|E^{-i\chi},\; 0 <\chi < 2\pi$.
+where $V_{ab} - V*_{ba} = |V_{ab}|E^{-i\chi},\; 0 <\chi < 2\pi$. This can be made into
+an eigenvalue problem
+\begin{equation}
+  H\begin{pmatrix}
+  |\phi_a\rangle \\
+  |\phi_b\rangle
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \epsilon_a & V_{ab} \\
+    V_{ba} & \epsilon_b
+  \end{pmatrix}
+  \begin{pmatrix}
+  |\phi_a\rangle \\
+  |\phi_b\rangle
+  \end{pmatrix}
+  =\epsilon_{\pm}
+  \begin{pmatrix}
+  |\phi_a\rangle \\
+  |\phi_b\rangle
+  \end{pmatrix}
+\end{equation}
+
+Diagonalize the Hamiltonian,
+\begin{align}
+  \text{det}(H-\lambda\mathbf{1}) &= 0 \\
+  (\epsilon_a-\lambda)(\epsilon_b-\lambda) - |V_{ab}|^2 &= 0 \\
+  \lambda^2 -\lambda(\epsilon_a+\epsilon_b) + \epsilon_a\epsilon_b
+  - |V_{ab}|^2 &= 0 \\
+  \lambda &= \frac{(\epsilon_a+\epsilon_b) \pm
+    \sqrt{(\epsilon_a+\epsilon_b)^2 -4\epsilon_a\epsilon_b + 4|V_{ab}|^2}}{2}\\
+  & = \frac{(\epsilon_a+\epsilon_b) \pm
+    \sqrt{(\epsilon_a-\epsilon_b)^2 + 4|V_{ab}|^2}}{2} \nonumber \\
+\end{align}
+Eigenvectors corresponding to eigenvalues $\lambda$ are
+\begin{equation}
+  \begin{pmatrix}
+    \frac{\epsilon_a-\epsilon_b\pm\sqrt{(\epsilon_a-\epsilon_b)^2+4|V_{ab}|^2}}{2V} & 1
+  \end{pmatrix}
+  \label{eqn:theta}
+\end{equation}
+The corresponding generalized eigenvectors ($|\psi_{\m}\rangle$) are simply
+linear compinations of $|\phi_a\rangle$ and $|\phi_b\rangle$
+with the associated radiation phase $e^{\pm i\chi}$. These are rotated eigenvectors
+from Eqn \eqref{eqn:theta}
+\begin{equation}
+  \begin{pmatrix}
+    |\psi_+\rangle \\
+    |\psi_-\rangle
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \cos(\theta) & \sin(\theta) \\
+    -\sin(\theta)& \cos(\theta)
+  \end{pmatrix}
+  \begin{pmatrix}
+    e^{-i\chi/2}|\phi_a\rangle \\
+    e^{i\chi/2}|\phi_b\rangle
+  \end{pmatrix}
+  =\begin{pmatrix}
+  \cos(\theta)e^{-i\chi}|\phi_a\rangle + \sin(\theta) e^{i\chi}|\phi_b\rangle \\
+  \cos(\theta)e^{-i\chi}|\phi_a\rangle - \sin(\theta) e^{i\chi}|\phi_b\rangle
+  \end{pmatrix}
+  \label{eqn:sup_eig}
+\end{equation}
+
+$\theta$ is a transformation angle that can be determined with Eqns
+\eqref{eqn:theta} and \eqref{eqn:sup_eig}. The work is shown in the mathematica
+notebook
+\begin{equation}
+  \tan 2\theta \equiv \frac{2|V_{ab}|}{\epsilon_a-\epsilon_b},\; 0<\theta<\pi/2
+\end{equation}
+
+Within this basis, the time evolution operator is given by
+\begin{equation}
+  U(t,t_0) = |\psi_+\rangle e^{-\frac{i\lambda_+}{\hbar}(t-t_0)}\langle\psi_+|
+  + |\psi_-\rangle e^{-\frac{i\lambda_-}{\hbar}(t-t_0)}\langle\psi_-|
+  \label{eqn:time_2_level}
+\end{equation}
+
+\subsection{Progating the two-level system}
+
+Suppose the system is at initial time $t_0$ in the $|\phi_a\rangle$ state
+and the probability that the system is in $|\phi_a\rangle$ at time $t$.
+\begin{equation}
+  P_{ab}(t)\equiv |\langle\phi_b|\psi(t)\rangle|^2 = |\langle\phi_b|U(t,t_0)|\phi_a\rangle|^2
+  \label{eqn:prob_time}
+\end{equation}
+
+The states $|\phi_a\rangle$ and $|\phi_b\rangle$ are defined as unit
+vectors and the substitution of Eqn \eqref{eqn:time_2_level} into Eqn \eqref{eqn:prob_time}
+will yield the probability to be in state $|\phi_a\rangle$ at a given time $t$.
+The work is shown in mathematica.
+\begin{equation}
+  P_{ab}(t)=\frac{4|V_{ab}|^2}{4|V_{ab}|^2+(\epsilon_a-\epsilon_b)^2}
+  \sin^2\Bigg(\sqrt{4|V_{ab}+(\epsilon_a-\epsilon_b)^2}}\frac{t}{2\hbar}\Bigg)
+\end{equation}
+
 
 \end{document}
