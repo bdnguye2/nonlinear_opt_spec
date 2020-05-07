@@ -242,4 +242,150 @@ This is known as the Rabi formula and
 \end{equation}
 is the Rabi frequency.
 
+\subsection{Propagation with Time-Dependent Hamiltonians: Time Ordering}
+
+The generalize definition of the time-evolution operator to the time-dependent
+Hamiltonian,
+\begin{equation}
+  \frac{\partial}{\partial t} U(t,t_0)|\psi(t_0)\rangle
+  = - \frac{i}{\hbar}H(t)U(t,t_0)|\psi(t_0)\rangle.
+  \label{eqn:time_int}
+\end{equation}
+Upon integration, the time propagator operator is
+\begin{equation}
+  U(t,t_0) = 1 - \frac{i}{\hbar}\int^t_{t_0}\,d\tau\,H(t)U(t,t_0).
+  \label{eqn:int}
+\end{equation}
+Eqn \eqref{eqn:int} can be solved iteratively by plugging it into itself.
+Iterating once, it becomes
+\begin{equation}
+  U(t,t_0) = 1 + \sum^{\infty}_{n=1}\Bigg(-\frac{i}{\hbar}\Bigg)^n
+  \int^t_{t_0}d\tau_n\int^{\tau_n}_{t_0}d\tau_{n-1}\cdots\int^{\tau_2}_{t_0}
+  d\tau_1H(\tau_n)H(\tau_{n-1})\cdots H(\tau_1)
+  \label{eqn:time_order}
+\end{equation}
+Eqn \eqref{eqn:time_order} has the time variables as \textit{fully order}
+$t\leq\tau_n\leq\cdots\leq\tau_1\leqt_0$ and common to use a positive time
+order exponential denoted as
+\begin{equation}
+  U(t,t_0) = e_+^{-\frac{i}{\hbar}\int^t_{t_0}d\tau H(\tau)}.
+  \label{eqn:pos_time}
+\end{equation}
+Some cases may require taking the Hermitian conjugate
+\begin{align}
+  U^{\dagger}(t,t_0) = e_-^{\frac{i}{\hbar}\int^t_{t_0}d\tau H(\tau)}
+  \label{eqn:conjugate_time}\\
+  \langle\psi(t)| = \langle\psi(t)|U^{\dagger}(t,t_0)
+\end{align}
+Deriving eqn \eqref{eqn:conjugate_time} uses the hermiticity of the Hamiltonian
+$H^{\dagger}(\tau)=H(\tau)$.
+
+\section{Interaction Picture}
+
+The time evolution operator is formally expressed and derived as follow
+\begin{align}
+  |\psi(t)\rangle & = U(t,t')U(t',t'')|\psi(t'')\rangle \\
+  U(t,t'') & = U(t,t')U(t',t'')
+\end{align}
+The time operator can break it up as many times,
+\begin{equation}
+  U(t,t_0) = U(t,t_n)U(t_n,t_{n-1})\cdots U(t_1,t_0)
+  \label{eqn:segs}
+\end{equation}
+This can be written into a large number $N$ of equal time segments $\delta t$
+with $N\Delta t = t - t_0$. If $\Delta t$ is very small, then
+\begin{equation}
+  U(t_n,t_{n-1})\approx 1 - \frac{i}{\hbar}H(t_n)\Delta t.
+  \label{eqn:inf_op}
+\end{equation}
+Introduced Eqn \eqref{eqn:inf_op} is the \textit{infinitesimal evolution operator}. Several properties
+can be shown such as unitary operator and the total time evolution operator is
+the product of infinitesimal evolution operator
+\begin{align}
+  U_{\text{tot}}(t,t_0) & = \Bigg[1-\frac{i}{\hbar}H(t_{n-1})\Delta t\Bigg]\Bigg[1-\frac{i}{\hbar}H(t_{n-2})\Delta t\Bigg]
+  \cdots \Bigg[1-\frac{i}{\hbar}H(t_0)\Delta t\Bigg] \\
+  & \approx 1 - \frac{i}{\hbar}\sum^n_{j=0}H(t_j)\Delta t + \cdots \\
+  & \approx 1 - \frac{i}{\hbar}\int^t_{t_0}d\tau H(\tau)
+\end{align}
+
+The interaction picture allows the Hamiltonian to contain the zeroth order $H_0$
+treated exactly while the remainder $H'(t)$ is expanded perturbatively. Let's
+solve the $H_0$ exactly,
+\begin{align}
+  H(t) & = H_0(t) + H'(t) \\
+  \frac{\partial}{\partial t}U_0(t,t_0) & = -\frac{i}{\hbar}H_0(t)U_0(t,t_0) \\
+  U_0(t,t_0) & = e_+^{-\frac{i}{\hbar}\int^t_{t_0}d\tau H_0(\tau)}
+\end{align}
+The solution of the $U_0(t,t_0)$ lead to the definition of the interaction
+picture wavefunction $|\psi_{\text{I}}(t)\rangle$
+\begin{equation}
+  |\psi_S(t)\rangle\equiv U_0(t,t_0)|\psi_I(t)\rangle
+  \label{eqn:int_wave}
+\end{equation}
+where $|\psi_S(t)\rangle$ is the Schr{\"o}dinger picture wavefunction.
+Substituion of the interaction picture wavefunction into the TDSE yields
+\begin{align}
+  \frac{\partial |\psi_I(t)\rangle}{\partial t} & = -\frac{i}{\hbar}H'_I(t)|\psi_I(t)\rangle
+  \label{eqn:int_s}\\
+  H'_I(t) & \equiv U_0^{\dagger}(t,t_0)H'(t)U_0(t,t_0)
+\end{align}
+The time propagator operator is introduced within the interaction representation
+\begin{equation}
+  |\psi_I(t)\rangle \equiv U_I(t,t_0)|\psi(t_0)\rangle
+  \label{eqn:time_prop_int}
+\end{equation}
+Upon substituting Eqn \eqref{eqn:time_prop_int} into Eqn \eqref{eqn:int_s} to
+get
+\begin{align}
+  \frac{\partial}{\partial t} U_I(t,t_0) & = -\frac{i}{\hbar}H'_I(t)U_I(t,t_0) \\
+  U_I(t,t_0) & = e_+^{-\frac{i}{\hbar}\int^t_{t_0}d\tau H'_I(\tau)}
+  \label{eqn:int_time_soln}
+\end{align}
+Looking back at the Schr{\"o}dinger picture, the time propagator operator $U(t,t_0)
+can be derived
+\begin{align}
+  |\psi_S(t)\rangle & = U_0(t,t_0)|\psi_I(t)\rangle \\
+  & = U_0(t,t_0)U_I(t,t_0)|\psi_I(t_0)\rangle \\
+  & = U_0(t,t_0)U_I(t,t_0)|\psi_S(t_0)\rangle
+\end{align}
+At initial time $t_0$, the $|\psi_I(t_0)\rangle = |\psi_S(t_0)\rangle$ and hence,
+the $U(t,t_0)$ becomes
+\begin{align}
+  U(t,t_0) & = U_0(t,t_0)U_I(t,t_0) \\
+  & = U_0(t,t_0)e_+^{-\frac{i}{\hbar}\int_{t_0}^td\tau H'_I(t)}
+\end{align}
+As long as $H_0$ and $U_0(t,t_0)$ are expressed exactly, the time operator
+may be expanded in powers of $H'(\tau)$ alone
+\begin{equation}
+  U(t,t_0) = U_0(t,t_0) + \sum^{\infty}_{n=1}\Bigg(-\frac{i}{\hbar}\Bigg)^n
+  \int^t_{t_0}d\tau_n\cdots\int^{\tau_2}_{t_0}d\tau_1
+  U_0(t,\tau_n)H'(\tau_n)U_0(\tau_n\tau_{n-1})\cdots U_0(\tau_2,\tau_1)H'(\tau_2)U_0(\tau_1,t_0).
+  \label{eqn:full_time_int}
+\end{equation}
+All time ordering is satisfied by Eqn \eqref{eqn:full_time_int}. The result
+may be interpreted as the system propogating freely from time $t_0$ to $\tau_1$
+with $U_0(\tau_1,t_0)$ and then interacts with $H'(\tau_1)$ from time $\tau_1$
+to $\tau_2$ with $U_0(\tau_2,\tau_1)$ and etc. In addition, this form allow
+truncation at low order and propagation at long time. The corresponding wavefunction
+can be determine up to first order
+\begin{equation}
+  |\psi(t)\rangle = |\psi_0(t)\rangle - \frac{i}{\hbar}\int^t_{t_0}
+  d\tau U_0(t,\tau)H'(\tau)|\psi(\tau)\rangle
+\end{equation}
+where
+\begin{equation}
+  |\psi_0(t)\rangle\equiv U_0(t,t_0)|\psi_S(t_0)\rangle
+\end{equation}
+
+\subsection{Properties of Interaction Picture}
+
+The interaction picture has a significant meaning for a given operator $A$
+defined as
+\begin{equation}
+  A_I(t)\equiv U^{\dagger}_0(t,t_0)A_SU(t,t_0)
+  \label{eqn:op_int}
+\end{equation}
+
+
+
 \end{document}
