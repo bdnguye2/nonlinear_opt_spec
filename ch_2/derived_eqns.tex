@@ -218,17 +218,17 @@ is using Eqn \eqref{eqn:angle_transform}, the trignometry identity
 $\sin^22\theta + \cos^22\theta = 1$, and substituting in the eigenvalues $\lambda$.
 This is left for the reader to derive. Figure \ref{fig:prob} is the plot of
 the probability for various coupling constants $V_{ab}$.
-%\begin{align*}
-%  (\tan 2\theta & =  \frac{2|V_{ab}|}{\epsilon_a-\epsilon_b})^2 \\
-%  \tan^2(2\theta) & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
-%  \sin^2(2\theta) + \cos^2(2\theta) & = 1 \\
-%  \tan^2(2\theta) & = \frac{1}{\cos^2(2\theta)} - 1 \\
-%  & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
-%  \frac{1}{\cos^2(2\theta)} & = \frac{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}{(\epsilon_a-\epsilon_b)^2} \\
-%  \cos^2(2\theta) & = \frac{(\epsilon_a-\epsilon_b)^2}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2} \\
-%  & = 1 - \sin^2(2\theta) \\
-%  \sin^2(2\theta) & = \frac{4|V_{ab}|}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}
-%\end{align*}
+\begin{align*}
+  \Bigg(\tan 2\theta & =  \frac{2|V_{ab}|}{\epsilon_a-\epsilon_b}\Bigg)^2 \\
+  \tan^2(2\theta) & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
+  \sin^2(2\theta) + \cos^2(2\theta) & = 1 \\
+  \tan^2(2\theta) & = \frac{1}{\cos^2(2\theta)} - 1 \\
+  & = \frac{4|V_{ab}|^2}{(\epsilon_a-\epsilon_b)^2} \\
+  \frac{1}{\cos^2(2\theta)} & = \frac{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}{(\epsilon_a-\epsilon_b)^2} \\
+  \cos^2(2\theta) & = \frac{(\epsilon_a-\epsilon_b)^2}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2} \\
+  & = 1 - \sin^2(2\theta) \\
+  \sin^2(2\theta) & = \frac{4|V_{ab}|}{4|V_{ab}|^2 + (\epsilon_a-\epsilon_b)^2}
+\end{align*}
 \begin{figure}[hbpt]
   \centering
   \includegraphics[scale=0.8]{prob2.eps}
@@ -265,7 +265,7 @@ Iterating once, it becomes
   \label{eqn:time_order}
 \end{equation}
 Eqn \eqref{eqn:time_order} has the time variables as \textit{fully order}
-$t\leq\tau_n\leq\cdots\leq\tau_1\leqt_0$ and common to use a positive time
+$t\leq\tau_n\leq\cdots\leq\tau_1\leq_0$ and common to use a positive time
 order exponential denoted as
 \begin{equation}
   U(t,t_0) = e_+^{-\frac{i}{\hbar}\int^t_{t_0}d\tau H(\tau)}.
@@ -341,7 +341,7 @@ get
   U_I(t,t_0) & = e_+^{-\frac{i}{\hbar}\int^t_{t_0}d\tau H'_I(\tau)}
   \label{eqn:int_time_soln}
 \end{align}
-Looking back at the Schr{\"o}dinger picture, the time propagator operator $U(t,t_0)
+Looking back at the Schr{\"o}dinger picture, the time propagator operator $U(t,t_0)$
 can be derived
 \begin{align}
   |\psi_S(t)\rangle & = U_0(t,t_0)|\psi_I(t)\rangle \\
@@ -385,7 +385,67 @@ defined as
   A_I(t)\equiv U^{\dagger}_0(t,t_0)A_SU(t,t_0)
   \label{eqn:op_int}
 \end{equation}
+Time evolution in the interaction picture is given by
+\begin{align}
+  \langle A(t)\rangle & = \langle \psi_I(t)|A_I(t)|\psi_I(t)\rangle \\
+  \frac{\partial \psi_I}{\partial t} & = -\frac{i}{\hbar}H'_I(t)\psi_I \\
+  \frac{\partial A_I}{\partial t} & = \frac{i}{\hbar}[H_0,A_I] \\
+  H'_I(t) & = U^{\dagger}_0(t,t_0)H'(t)U_0(t,t_0)
+\end{align}
+These equations are valid for an arbitrary partitioning of the Hamiltonian.
+For instance, choosing the $H_0=0$ and $H'=H$ yield the \textit{Schr{\"o}dinger
+  picture} where the time evolution is entirely with the wavefunction and the
+operators are time independent. Moreover, a choice of $H_0=H$ and H'=0 yields
+the \textit{Heisenberg picture} where the wavefunction is time independent and
+the entire evolution is with the operator. Meanwhile, the interaction picture
+is the mix beteween the \textit{Schr{\"o}dinger} and \textit{Heisenberg pictures}.
 
+\subsection{Magnus Expansion}
+The application of the cumulant expansion on the time evolution operator in the
+interaction picture and expressed the time-ordered exponential of $H'_I$ as an
+ordinary exponential of a different, time-dependent operator, given by an infinite
+series.
+\begin{equation}
+  U_I(t,t_0) = e_+^{-i/\hbar\int_0^t\,d\tau H_I'(\tau)} \equiv
+    e^{\sum_{n=1}^{\infty}(1/n!)(-i/\hbar)^nH_n(t,t_0)}
+\end{equation}
+where
+\begin{align}
+  H_1 & = \int_{t_0}^t d\tau_1 H_I'(\tau_1) \\
+  H_2 & = \int_{t_0}^t d\tau_2 \int_{t_0}^{t_2} d\tau_1 [H_I'(\tau_2),H_I'(\tau_1)] \\
+  H_3 & = \int_{t_0}^t d\tau_3 \int_{t_0}^{t_3} d\tau_2 \int_{t_0}^{t_2} d\tau_1
+  \{[H_I'(\tau_3),[H_I'(\tau_2),H_I'(\tau_1)]] + [[H_I'(\tau_3),H_I'(\tau_2)],H_I'(\tau_1)]\}.
+\end{align}
+
+\section{Green Function and Casuality}
+Casuality describes that in the natural science, the effect does not come before
+the cause. An example is that the effect of a ball moving happens due to a force
+causing it to move. With the time evolution operator $U(t,t_0)$, it is useful to
+work in the frequency domain rather than the time domain. This unitary transformation
+is done by the Green function which separates the forward ($t>t_0$) and reverse ($t<t_0$)
+propagations.
+\begin{align}
+  G(t-t_0) & \equiv \theta(t-t_0)U(t,t_0) \\
+  & = \theta(t-t_0)E^{(-i/\hbar)H(t-t_0)} \nonumber
+\end{align}
+where $\theta(t-t_0)$ is the Heavyside step function. Contour integration yields
+\begin{align}
+  \theta(t-t_0)U(t,t_0) 7 & = -\frac{1}{2\pi i}\int_{-\infty}^{\infty} dE e^{-(i/\hbar)E(t-t_0)}G(E) \\
+  G(E) & = \sum_n \frac{|\phi_n\rangle\langle\phi_n|}{E-E_n+i\epsilon}
+\end{align}
+
+Once in this form, perturbative expansion can be conveniently carried out using
+the Green functio which satisfy the Dyson equation. The zero order Green function
+\begin{equation}
+  G_0(E) = \frac{1}{E-H_0+i\epsilon}
+\end{equation}
+where $H = H_0 + V$. Using the identity $A^{-1} = B^{-1}(B-A)A^{-1}$, where
+$A$ and $B$ are operators, then
+\begin{align}
+  G(E) & = G_0(E) + G_0(E)VG(E) \\
+  G(E) & = G_0(E) + G_0(E)VG_0(E) + G_0(E)VG_0(E)VG_0(E) + \cdots
+\end{align}
+Keep in mind, $G_0(E)$ is a diagonal matrix while $V$ is an off-diagonal matrix.
 
 
 \end{document}
