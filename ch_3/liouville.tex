@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm} %lets us use \begin{proof}
+\usepackage{amssymb} %gives us the character \varnothing
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{mathtools}
+
+\title{Chapter 2: Quantum Dynamics in Hilbert Space} % Title of the assignment
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+
+Chapter 2 introduces the reader to the Time-Dependent Schr{\"o}dinger equation (TDSE)
+and defines the time propagator operator ($U(t,t_0)$). The two level system is
+provided as an example of solving the TDSE and the corresponding time propagator operator
+is determined. The interaction picture is introduced to simplify the
+problem from the Schr{\"o}dinger picture and various properties are shown. Lastly,
+the Greens function within the frequency domain is used to model the proposed
+Wigner and Weisskopy of irreversible decay.
+
+\section*{Time-Evolution Operator with Time-Dependent Hamiltonian}
+
+Within the Schr{\"o}dinger picture, the TD wavefunction is given by
+\begin{equation}
+  \psi(\mathbf{x},t) = \langle \mathbf{x}|\psi(t)\rangle
+\end{equation}
+
+and the TDSE will be defined as
+\begin{equation}
+  \frac{\partial|\psi(t)\rangle}{\partial t} = -\frac{i}{\hbar}H|\psi(t)\rangle
+  \label{eqn:tdse}
+\end{equation}
+
+and solutions to Eqn \eqref{eqn:tdse} are the eigenvalues $E_n$ with corresponding
+eigenvectors $|\phi_n(t)\rangle$. These eigenvections satisfy the completness
+condition $\sum_n|\phi_n\rangle\langle\phi_n|$. We can expand the wavefunction
+$\psi(t)$ within this basis,
+\begin{equation}
+  |\psi(t)\rangle = \sum_n|\phi_n\rangle\langle\phi_n|
+  \label{eqn:basis_expan}
+\end{equation}
+
+
+\end{document}
